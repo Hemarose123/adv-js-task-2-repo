@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Advanced JS Practice 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    pre {
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1> JavaScript Task Practice - 2</h1>
+  <pre id="output"></pre>
+
+  <script>
+    const output = document.getElementById("output");
+    let result = "";
+
+    function replaceAllWords(str, oldWord, newWord) {
+      return str.replaceAll(oldWord, newWord);
+    }
+    result += "Task 1 - replaceAll:\n";
+    result += replaceAllWords("apple banana apple grape apple", "apple", "orange") + "\n\n";
+
+    function isIncluded(arr, value) {
+      return arr.includes(value);
+    }
+    result += "Task 2 - includes:\n";
+    result += isIncluded(["apple", "banana", "cherry"], "banana") + "\n\n";
+
+    async function fetchTodoData() {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+        const data = await response.json();
+        result += "Task 3 - fetch API:\n";
+        result += JSON.stringify(data, null, 2) + "\n\n";
+        output.textContent = result;
+      } catch (error) {
+        result += "Task 3 - Error fetching data: " + error + "\n\n";
+        output.textContent = result;
+      }
+    }
+
+    function safeDivide(a, b) {
+      try {
+        if (b === 0) throw new Error("Division by zero is not allowed.");
+        return a / b;
+      } catch (error) {
+        return error.message;
+      }
+    }
+    result += "Task 4 - Safe Divide:\n";
+    result += safeDivide(4, 2) + "\n";
+    result += safeDivide(4, 0) + "\n\n";
+
+    function introduce(name, age) {
+      return `Hello, my name is ${name} and I am ${age} years old.`;
+    }
+    result += "Task 5 - Template Literals:\n";
+    result += introduce("John", 30) + "\n\n";
+
+    function showDetails(person) {
+      const { name, age, city } = person;
+      return `${name}\n${age}\n${city}`;
+    }
+    result += "Task 6 - Destructuring:\n";
+    result += showDetails({ name: "Alice", age: 25, city: "New York" }) + "\n\n";
+
+    function addWithDefault(a, b = 10) {
+      return a + b;
+    }
+    result += "Task 7 - Default Parameters:\n";
+    result += addWithDefault(5, 20) + "\n";
+    result += addWithDefault(5) + "\n\n";
+
+    function sumEverything(...numbers) {
+      return numbers.reduce((sum, num) => sum + num, 0);
+    }
+    result += "Task 8 - Rest Parameters:\n";
+    result += sumEverything(1, 2, 3, 4, 5) + "\n\n";
+
+    function sumArray(numbers) {
+      return numbers.reduce((acc, val) => acc + val, 0);
+    }
+    result += "Task 9 - Reduce Sum:\n";
+    result += sumArray([1, 2, 3, 4, 5]) + "\n\n";
+
+    output.textContent = result;
+
+    fetchTodoData();
+  </script>
+</body>
+</html>
